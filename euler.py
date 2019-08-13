@@ -24,10 +24,11 @@ print('Способ 1. Перебор.')
 
 
 def sum_natural(_from, _to):
+    result = 0
     for number in range(_from, _to):
         if number % 3 == 0 or number % 5 == 0:
-                sum += number
-        return sum
+            result += number
+    return result
 
 
 answer = sum_natural(1, x+1)
