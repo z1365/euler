@@ -35,19 +35,11 @@ def fib_sum(limit):
 
 
 x = 4000000
-# рекурсивно
+
 result = fib_sum(x)
 print("{:,}".format(result))
 
-# строю прогрессию
-# while fib_list[len(fib_list) - 1] < x:
-#     fib_next = fib_list[len(fib_list) - 2] + fib_list[len(fib_list) - 1]
-#     if fib_next > x:
-#         print('следующий член: \x1b[35m{:,}\x1b[0m. ' \
-#               'Но он больше заданной области:\x1b[35m {:,}\x1b[0m'.format(fib_next, x))
-#         break
-#     fib_list.append(fib_next)
-# print(fib_list)
+# сгенерированный ряд
 # >>> [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987,
 #     1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025,
 #     121393, 196418, 317811, 514229, 832040, 1346269,
