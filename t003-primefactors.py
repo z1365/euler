@@ -38,8 +38,8 @@ def next_simple(simple):
             continue
         devided = False
         for s in simple_nums:
-            if s == 1:
-                continue
+            # if s == 1:
+            #     continue
             if int(num / s) == num / s:
                 # разделилось, не простое
                 devided = True
@@ -51,15 +51,23 @@ def next_simple(simple):
 start_time = time.time()
 check_time = start_time
 # print(Fore.RED + Style.BRIGHT + str(time.time()) + Style.RESET_ALL)
-simple_nums = [1, 2, 3, 5]
+simple_nums = [2, 3, 5]
 # lab_rat = 600851475143
-lab_rat = 60085147514
+lab_rat = 600851475143
 # наибольший простой делитель
 lagest_prime_factor = 1
 
 # самый большой числитель может быть только квадратным корнем от делимого
 limit = int(math.sqrt(lab_rat))
+# в 4каком десятке тысяч мы сейчас
+we_are_at = 0
 while limit > simple_nums[-1]:
+    if simple_nums[-1] / 10000 > we_are_at:
+        we_are_at += 1
+        tenth_time = time.time()
+        delta_time = tenth_time - start_time
+        str_time = str(datetime.timedelta(seconds=delta_time))
+        print(Style.RESET_ALL + 'Спустя \x1b[31;1m{}\x1b[0m прошёл \x1b[32;1m{}\x1b[0m из {}'.format(str_time, simple_nums[-1], limit))
     # ищем следующее простое
     simple_nums.append(next_simple(simple_nums[-1]))
     # если испытуемый делится нацело
@@ -74,7 +82,7 @@ while limit > simple_nums[-1]:
         print('\x1b[0mСпустя {} нашелся делитель \x1b[33;1m{}\x1b[0m'.format(str_time, lagest_prime_factor))
 
 
-print("Ответ: " + Fore.GREEN + Style.BRIGHT + lagest_prime_factor + Style.RESET_ALL)
+print("Ответ: " + Fore.GREEN + Style.BRIGHT + str(lagest_prime_factor) + Style.RESET_ALL)
 
 end_time = time.time()
 delta_time = end_time - start_time
