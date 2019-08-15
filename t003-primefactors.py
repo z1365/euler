@@ -1,4 +1,6 @@
 import os
+import subprocess
+
 from colorama import init, deinit, Fore, Style  # Back
 import time
 import datetime
@@ -6,8 +8,17 @@ import math
 
 init()
 
-# cls + Шапка
-os.system('cls')
+
+def cls():
+    if os.name in ('nt', 'dos'):
+        subprocess.call("cls")
+    elif os.name in ('linux', 'osx', 'posix'):
+        subprocess.call("clear")
+    else:
+        print("\n") * 120
+
+
+cls()
 print('{:*^80}'.format('  \x1b[33;1mПроект Эйлера\x1b[0m  '))
 print('{:^80}'.format('\x1b[32mhttp://projecteuler.net/archives\x1b[0m'))
 
