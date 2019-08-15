@@ -40,7 +40,7 @@ def next_simple(simple):
         for s in simple_nums:
             # if s == 1:
             #     continue
-            if int(num / s) == num / s:
+            if num % s == 0:
                 # разделилось, не простое
                 devided = True
                 break
@@ -48,12 +48,23 @@ def next_simple(simple):
     return num
 
 
+def is_prime(num):
+    ''' Возвращает True, если аргумент - простое число'''
+    if (num % 2 == 0) or (num % 10 == 5):
+        return False
+    for s in range(3, num - 1):
+        if num % s == 0:
+            return False
+    return True
+
+
+__version__ = "1.0.0"
 start_time = time.time()
 check_time = start_time
 # print(Fore.RED + Style.BRIGHT + str(time.time()) + Style.RESET_ALL)
 simple_nums = [2, 3, 5]
-# lab_rat = 600851475143
 lab_rat = 600851475143
+# lab_rat = 13195
 # наибольший простой делитель
 lagest_prime_factor = 1
 
@@ -62,18 +73,27 @@ limit = int(math.sqrt(lab_rat))
 # в 4каком десятке тысяч мы сейчас
 we_are_at = 0
 while limit > simple_nums[-1]:
+    # счётчик каждых 10 000 чисел, чтобы выводить на экран время прохождения
     if simple_nums[-1] / 10000 > we_are_at:
         we_are_at += 1
         tenth_time = time.time()
         delta_time = tenth_time - start_time
         str_time = str(datetime.timedelta(seconds=delta_time))
-        print(Style.RESET_ALL + 'Спустя \x1b[31;1m{}\x1b[0m прошёл \x1b[32;1m{}\x1b[0m из {}'.format(str_time, simple_nums[-1], limit))
+        print(Style.RESET_ALL + 'Спустя \x1b[31;1m{}\x1b[0m прошёл \x1b[32;1m{:,}\x1b[0m из {:,}'.format(str_time, simple_nums[-1], limit))
     # ищем следующее простое
     simple_nums.append(next_simple(simple_nums[-1]))
     # если испытуемый делится нацело
     if lab_rat % simple_nums[-1] == 0:
-        # то на данный момент это наибольший простой делитель
-        lagest_prime_factor = simple_nums[-1]
+        # если второе слогаемое от деления тоже простое число
+        # и при этом больше первого, то наибольший простой делитель
+        # - второе слогаемое
+        second_factor = int(lab_rat / simple_nums[-1])
+        if is_prime(second_factor) and (second_factor > simple_nums[-1]):
+            lagest_prime_factor = second_factor
+            limit = second_factor
+        else:
+            lagest_prime_factor = simple_nums[-1]
+
         point_time = time.time()
         delta_time = point_time - check_time
         check_time = point_time
