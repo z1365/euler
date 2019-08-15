@@ -37,8 +37,8 @@ for first in range(100, 1000):
                 largest_polindrome = testing
                 # print('{} \x1b[32;1mэквивалентно \x1b[0m{}'.format(s1, s2))
 
-print("Ответ: " + Fore.GREEN + Style.BRIGHT + str(largest_polindrome) + Style.RESET_ALL)
+print("Ответ: \x1b[32;1m{}\x1b[0m".format(str(largest_polindrome)))
 end_time = time.time()
 delta_time = end_time - start_time
-print(Fore.RED + Style.BRIGHT + 'Работало ' + str(datetime.timedelta(seconds=delta_time)) + Style.RESET_ALL)
+print('\x1b[31;1mРаботало {}\x1b[0m'.format(str(datetime.timedelta(seconds=delta_time))))
 deinit()

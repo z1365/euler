@@ -1,5 +1,5 @@
 import os
-from colorama import init, deinit, Fore, Style   # Back
+from colorama import init, deinit, Fore, Style  # Back
 import time
 import datetime
 import math
@@ -25,7 +25,7 @@ print('''
 
 # ищу простые числа
 def next_simple(simple):
-    ''' Возвращает следующее за переданным простое число'''
+    """ Возвращает следующее за переданным простое число"""
     # признак простоты числа
     num = simple
     is_ismple = False
@@ -49,7 +49,7 @@ def next_simple(simple):
 
 
 def is_prime(num):
-    ''' Возвращает True, если аргумент - простое число'''
+    """ Возвращает True, если аргумент - простое число"""
     if (num % 2 == 0) or (num % 10 == 5):
         return False
     for s in range(3, num - 1):
@@ -63,8 +63,8 @@ start_time = time.time()
 check_time = start_time
 # print(Fore.RED + Style.BRIGHT + str(time.time()) + Style.RESET_ALL)
 simple_nums = [2, 3, 5]
+# -- lab_rat = 600851475143
 lab_rat = 600851475143
-# lab_rat = 13195
 # наибольший простой делитель
 lagest_prime_factor = 1
 
@@ -79,7 +79,8 @@ while limit > simple_nums[-1]:
         tenth_time = time.time()
         delta_time = tenth_time - start_time
         str_time = str(datetime.timedelta(seconds=delta_time))
-        print(Style.RESET_ALL + 'Спустя \x1b[31;1m{}\x1b[0m прошёл \x1b[32;1m{:,}\x1b[0m из {:,}'.format(str_time, simple_nums[-1], limit))
+        print(Style.RESET_ALL + 'Спустя \x1b[31;1m{}\x1b[0m прошёл \x1b[32;1m{:,}\x1b[0m из {:,}'
+              .format(str_time, simple_nums[-1], limit))
     # ищем следующее простое
     simple_nums.append(next_simple(simple_nums[-1]))
     # если испытуемый делится нацело
@@ -100,7 +101,6 @@ while limit > simple_nums[-1]:
         str_time = str(datetime.timedelta(seconds=delta_time))
         print(Style.RESET_ALL)
         print('\x1b[0mСпустя {} нашелся делитель \x1b[33;1m{}\x1b[0m'.format(str_time, lagest_prime_factor))
-
 
 print("Ответ: " + Fore.GREEN + Style.BRIGHT + str(lagest_prime_factor) + Style.RESET_ALL)
 
