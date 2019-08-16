@@ -1,7 +1,6 @@
-import os
+import termscreen
 
-# cls + Шапка
-os.system('cls')
+termscreen.cls()
 print('{:*^80}'.format('  \x1b[33mПроект Эйлера\x1b[0m  '))
 print('{:^80}'.format('\x1b[32mhttp://projecteuler.net/archives\x1b[0m'))
 
