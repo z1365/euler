@@ -29,46 +29,46 @@ check_time = start_time
 prime_numbers_list = [2, 3, 5]
 # -- lab_rat = 600851475143
 lab_rat = 600851475143
+largest_prime_factor = list(prime_numbers.get_prime_deviders(lab_rat, [2, 3, 5, 7]))[-1]
 # наибольший простой делитель
-lagest_prime_factor = 1
+#
+# # самый большой числитель может быть только квадратным корнем от делимого
+# limit = int(math.sqrt(lab_rat))
+# # в 4каком десятке тысяч мы сейчас
+# we_are_at = 0
+# while limit > prime_numbers_list[-1]:
+#     # счётчик каждых 10 000 чисел, чтобы выводить на экран время прохождения
+#     if prime_numbers_list[-1] / 10000 > we_are_at:
+#         we_are_at += 1
+#         tenth_time = time.time()
+#         delta_time = tenth_time - start_time
+#         str_time = str(datetime.timedelta(seconds=delta_time))
+#         print('\x1b[0mСпустя \x1b[31;1m{}\x1b[0m прошёл \x1b[32;1m{:,}\x1b[0m из {:,}'
+#               .format(str_time, prime_numbers_list[-1], limit))
+#     # ищем следующее простое
+#     prime_numbers_list.append(prime_numbers.next_prime(prime_numbers_list[-1], prime_numbers_list))
+#     # если испытуемый делится нацело
+#     if lab_rat % prime_numbers_list[-1] == 0:
+#         # если второе слогаемое от деления тоже простое число
+#         # и при этом больше первого, то наибольший простой делитель
+#         # - второе слогаемое
+#         second_factor = int(lab_rat / prime_numbers_list[-1])
+#         if prime_numbers.is_prime(second_factor) and (second_factor > prime_numbers_list[-1]):
+#             lagest_prime_factor = second_factor
+#             limit = second_factor
+#             break
+#         else:
+#             lagest_prime_factor = prime_numbers_list[-1]
+#
+#         point_time = time.time()
+#         delta_time = point_time - check_time
+#         check_time = point_time
+#         str_time = str(datetime.timedelta(seconds=delta_time))
+#         print('\x1b[0mСпустя {} нашелся делитель \x1b[33;1m{}\x1b[0m'.format(str_time, lagest_prime_factor))
 
-# самый большой числитель может быть только квадратным корнем от делимого
-limit = int(math.sqrt(lab_rat))
-# в 4каком десятке тысяч мы сейчас
-we_are_at = 0
-while limit > prime_numbers_list[-1]:
-    # счётчик каждых 10 000 чисел, чтобы выводить на экран время прохождения
-    if prime_numbers_list[-1] / 10000 > we_are_at:
-        we_are_at += 1
-        tenth_time = time.time()
-        delta_time = tenth_time - start_time
-        str_time = str(datetime.timedelta(seconds=delta_time))
-        print('\x1b[0mСпустя \x1b[31;1m{}\x1b[0m прошёл \x1b[32;1m{:,}\x1b[0m из {:,}'
-              .format(str_time, prime_numbers_list[-1], limit))
-    # ищем следующее простое
-    prime_numbers_list.append(prime_numbers.next_prime(prime_numbers_list[-1], prime_numbers_list))
-    # если испытуемый делится нацело
-    if lab_rat % prime_numbers_list[-1] == 0:
-        # если второе слогаемое от деления тоже простое число
-        # и при этом больше первого, то наибольший простой делитель
-        # - второе слогаемое
-        second_factor = int(lab_rat / prime_numbers_list[-1])
-        if prime_numbers.is_prime(second_factor) and (second_factor > prime_numbers_list[-1]):
-            lagest_prime_factor = second_factor
-            limit = second_factor
-            break
-        else:
-            lagest_prime_factor = prime_numbers_list[-1]
-
-        point_time = time.time()
-        delta_time = point_time - check_time
-        check_time = point_time
-        str_time = str(datetime.timedelta(seconds=delta_time))
-        print('\x1b[0mСпустя {} нашелся делитель \x1b[33;1m{}\x1b[0m'.format(str_time, lagest_prime_factor))
-
-print('Ответ: \x1b[32;1m{}\x1b[0m'.format(str(lagest_prime_factor)))
+print('Ответ: \x1b[32;1m{:,}\x1b[0m'.format(largest_prime_factor))
 
 end_time = time.time()
 delta_time = end_time - start_time
-print('\x1b[32;1mРаботало {}'.format(str(datetime.timedelta(seconds=delta_time))))
+print('\x1b[31;1mРаботало {}'.format(str(datetime.timedelta(seconds=delta_time))))
 deinit()

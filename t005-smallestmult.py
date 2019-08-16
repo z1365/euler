@@ -18,15 +18,15 @@ from \x1b[35m1\x1b[30m to \x1b[35m10\x1b[30m without any remainder.
 
 \x1b[33mWhat is  the  smallest positive number that is evenly divisible by all
 of the numbers from 1 to 20?\n
-\x1b[33;1mКакое самое маленькое число делится нацело на все числа от \x1b[35;1m1\x1b[0m to \x1b[35;1m10\x1b[0m ?
+\x1b[33;1mКакое самое маленькое число делится нацело на все числа от \x1b[35;1m1\x1b[0m to \x1b[35;1m20\x1b[0m ?
 ''')
 
 # считать буду для 20
 number = 20
 
 # заполняю список простых чисел от 2 до анализируемого числа
-prime_num_list = prime_numbers.get_prime_numbers(number)
-
+# prime_num_list = prime_numbers.get_prime_numbers(number)
+prime_num_list = [2, 3, 5]
 # список слогаемых и их степеней
 global_deviders = {}
 

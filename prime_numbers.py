@@ -73,4 +73,6 @@ def get_prime_deviders(number: int, prime_num_list: list) -> dict:
         # если число не делится нацело, перехожу к следующему простому числу
         else:
             devider_index += 1
+            if len(prime_num_list) - 1 < devider_index:
+                prime_num_list.append(next_prime(prime_num_list[devider_index-1], prime_num_list))
     return prime_deviders
