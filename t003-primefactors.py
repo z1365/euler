@@ -1,24 +1,13 @@
-import os
-import subprocess
-
-from colorama import init, deinit, Fore, Style  # Back
+import termscreen
+from colorama import init, deinit  # Fore, Back, Style
 import time
 import datetime
 import math
+import prime_numbers
 
 init()
 
-
-def cls():
-    if os.name in ('nt', 'dos'):
-        subprocess.call("cls")
-    elif os.name in ('linux', 'osx', 'posix'):
-        subprocess.call("clear")
-    else:
-        print("\n") * 120
-
-
-cls()
+termscreen.cls()
 print('{:*^80}'.format('  \x1b[33;1mПроект Эйлера\x1b[0m  '))
 print('{:^80}'.format('\x1b[32mhttp://projecteuler.net/archives\x1b[0m'))
 
@@ -33,47 +22,11 @@ print('''
 \x1b[33;1mНайти наибольший простой делитель для '\x1b[36;1m600851475143\x1b[33;1m'?\x1b[0m
 ''')
 
-
-# ищу простые числа
-def next_simple(simple):
-    """ Возвращает следующее за переданным простое число"""
-    # признак простоты числа
-    num = simple
-    is_ismple = False
-    while not is_ismple:
-        # перехожу к следующему числу
-        num += 1
-        # если не '1', '3', '7' или '9' на конце - не простое, дальше
-        if (num % 2 == 0) or (num % 10 == 5):
-            # if str(num)[-1] != '1' and str(num)[-1] != '3' and str(num)[-1] != '7' and str(num)[-1] != '9':
-            continue
-        devided = False
-        for s in simple_nums:
-            # if s == 1:
-            #     continue
-            if num % s == 0:
-                # разделилось, не простое
-                devided = True
-                break
-        is_ismple = not devided
-    return num
-
-
-def is_prime(num):
-    """ Возвращает True, если аргумент - простое число"""
-    if (num % 2 == 0) or (num % 10 == 5):
-        return False
-    for s in range(3, num - 1):
-        if num % s == 0:
-            return False
-    return True
-
-
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 start_time = time.time()
 check_time = start_time
 # print(Fore.RED + Style.BRIGHT + str(time.time()) + Style.RESET_ALL)
-simple_nums = [2, 3, 5]
+prime_numbers_list = [2, 3, 5]
 # -- lab_rat = 600851475143
 lab_rat = 600851475143
 # наибольший простой делитель
@@ -83,39 +36,39 @@ lagest_prime_factor = 1
 limit = int(math.sqrt(lab_rat))
 # в 4каком десятке тысяч мы сейчас
 we_are_at = 0
-while limit > simple_nums[-1]:
+while limit > prime_numbers_list[-1]:
     # счётчик каждых 10 000 чисел, чтобы выводить на экран время прохождения
-    if simple_nums[-1] / 10000 > we_are_at:
+    if prime_numbers_list[-1] / 10000 > we_are_at:
         we_are_at += 1
         tenth_time = time.time()
         delta_time = tenth_time - start_time
         str_time = str(datetime.timedelta(seconds=delta_time))
-        print(Style.RESET_ALL + 'Спустя \x1b[31;1m{}\x1b[0m прошёл \x1b[32;1m{:,}\x1b[0m из {:,}'
-              .format(str_time, simple_nums[-1], limit))
+        print('\x1b[0mСпустя \x1b[31;1m{}\x1b[0m прошёл \x1b[32;1m{:,}\x1b[0m из {:,}'
+              .format(str_time, prime_numbers_list[-1], limit))
     # ищем следующее простое
-    simple_nums.append(next_simple(simple_nums[-1]))
+    prime_numbers_list.append(prime_numbers.next_prime(prime_numbers_list[-1], prime_numbers_list))
     # если испытуемый делится нацело
-    if lab_rat % simple_nums[-1] == 0:
+    if lab_rat % prime_numbers_list[-1] == 0:
         # если второе слогаемое от деления тоже простое число
         # и при этом больше первого, то наибольший простой делитель
         # - второе слогаемое
-        second_factor = int(lab_rat / simple_nums[-1])
-        if is_prime(second_factor) and (second_factor > simple_nums[-1]):
+        second_factor = int(lab_rat / prime_numbers_list[-1])
+        if prime_numbers.is_prime(second_factor) and (second_factor > prime_numbers_list[-1]):
             lagest_prime_factor = second_factor
             limit = second_factor
+            break
         else:
-            lagest_prime_factor = simple_nums[-1]
+            lagest_prime_factor = prime_numbers_list[-1]
 
         point_time = time.time()
         delta_time = point_time - check_time
         check_time = point_time
         str_time = str(datetime.timedelta(seconds=delta_time))
-        print(Style.RESET_ALL)
         print('\x1b[0mСпустя {} нашелся делитель \x1b[33;1m{}\x1b[0m'.format(str_time, lagest_prime_factor))
 
-print("Ответ: " + Fore.GREEN + Style.BRIGHT + str(lagest_prime_factor) + Style.RESET_ALL)
+print('Ответ: \x1b[32;1m{}\x1b[0m'.format(str(lagest_prime_factor)))
 
 end_time = time.time()
 delta_time = end_time - start_time
-print(Fore.RED + Style.BRIGHT + 'Работало ' + str(datetime.timedelta(seconds=delta_time)) + Style.RESET_ALL)
+print('\x1b[32;1mРаботало {}'.format(str(datetime.timedelta(seconds=delta_time))))
 deinit()
