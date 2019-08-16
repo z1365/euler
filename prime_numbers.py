@@ -74,7 +74,3 @@ def get_prime_deviders(number: int, prime_num_list: list) -> dict:
         else:
             devider_index += 1
     return prime_deviders
-
-
-if __name__ == "main":
-    print(get_prime_deviders(20, get_prime_numbers(20)))
