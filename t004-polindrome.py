@@ -1,22 +1,10 @@
-import os
-import subprocess
-from colorama import init, deinit, Style  # Fore, Back
+import termscreen
+from colorama import init, deinit  # Style, Fore, Back
 import time
 import datetime
 
 init()
-
-
-def cls():
-    if os.name in ('nt', 'dos'):
-        subprocess.call("cls")
-    elif os.name in ('linux', 'osx', 'posix'):
-        subprocess.call("clear")
-    else:
-        print("\n") * 120
-
-
-cls()
+termscreen.cls()
 print('{:*^80}'.format('  \x1b[33;1mПроект Эйлера\x1b[0m  '))
 print('{:^80}'.format('\x1b[32mhttp://projecteuler.net/archives\x1b[0m'))
 
@@ -35,13 +23,13 @@ The largest palindrome made from the product of two 2-digit numbers is 9009 = 91
 ''')
 print('\x1b[0m')
 
-start_time = time.time()
-largest_polindrome = 0
+start_time: float = time.time()
+largest_polindrome: int = 0
 for first in range(100, 1000):
     for second in range(10, 1000):
         testing = first * second
-        s1 = str(testing)
-        s2 = s1[::-1]
+        s1: str = str(testing)
+        s2: str = s1[::-1]
         if s1 == s2:
             if largest_polindrome < testing:
                 largest_polindrome = testing
